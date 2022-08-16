@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.service.qa.dao.clearrecord.CardClearResultMapper">
+
+
+    <insert id="insertClearRecord" parameterType="com.example.service.qa.model.clearrecord.ClearAllDataRecord">
+        insert into tbl_crm_clear_data_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="itemID != null">
+                itemID,
+            </if>
+            <if test="ticketNo != null">
+                ticketNo,
+            </if>
+            <if test="fileName != null">
+                fileName,
+            </if>
+            <if test="groupID != null">
+                groupID,
+            </if>
+            <if test="groupName != null">
+                groupName,
+            </if>
+            <if test="clearType != null">
+                clearType,
+            </if>
+            <if test="userType != null">
+                userType,
+            </if>
+            <if test="result != null">
+                result,
+            </if>
+            <if test="remarks != null">
+                remarks,
+            </if>
+            <if test="traceID != null">
+                traceID,
+            </if>
+            <if test="operator != null">
+                operator,
+            </if>
+            <if test="ipAddr != null">
+                ipAddr,
+            </if>
+            <if test="filePath != null">
+                filePath,
+            </if>
+            <if test="createStamp != null">
+                createStamp, actionStamp
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="itemID != null">
+                #{itemID,jdbcType=BIGINT},
+            </if>
+            <if test="ticketNo != null">
+                #{ticketNo,jdbcType=VARCHAR},
+            </if>
+            <if test="fileName != null">
+                #{fileName,jdbcType=VARCHAR},
+            </if>
+            <if test="groupID != null">
+                #{groupID,jdbcType=BIGINT},
+            </if>
+            <if test="groupName != null">
+                #{groupName,jdbcType=VARCHAR},
+            </if>
+            <if test="clearType != null">
+                #{clearType,jdbcType=BIGINT},
+            </if>
+            <if test="userType != null">
+                #{userType,jdbcType=BIGINT},
+            </if>
+            <if test="result != null">
+                #{result,jdbcType=BIGINT},
+            </if>
+            <if test="remarks != null">
+                #{remarks,jdbcType=VARCHAR},
+            </if>
+            <if test="traceID != null">
+                #{traceID,jdbcType=VARCHAR},
+            </if>
+            <if test="operator != null">
+                #{operator,jdbcType=VARCHAR},
+            </if>
+            <if test="ipAddr != null">
+                #{ipAddr,jdbcType=VARCHAR},
+            </if>
+            <if test="filePath != null">
+                #{filePath,jdbcType=VARCHAR},
+            </if>
+            <if test="createStamp != null">
+                #{createStamp,jdbcType=TIMESTAMP},
+                #{createStamp,jdbcType=TIMESTAMP}
+            </if>
+        </trim>
+
+    </insert>
+    <update id="updateClearRecord" parameterType="com.example.service.qa.model.BaseContext">
+        update tbl_crm_clear_data_record
+        set result = #{context.result},
+        <if test="context.remarks!=null and context.remarks!=''">
+            remarks = #{context.remarks},
+        </if>
+        <if test="context.clearType != null">
+            clearType = #{context.clearType},
+        </if>
+        <if test="context.result != null">
+            result = #{context.result},
+        </if>
+        <if test="context.operator != null and context.operator !=''">
+            operator = #{context.operator},
+        </if>
+        actionStamp = #{actionStamp}
+        where itemID = #{itemId}
+    </update>
+
+    <update id="updateClearRecordStatus">
+        update tbl_crm_clear_data_record set result = #{result}, actionStamp = #{actionStamp} where itemID = #{itemId};
+    </update>
+
+    <select id="queryClearRecord" resultType="com.example.service.qa.model.clearrecord.ClearAllDataRecord">
+      select *
+      from tbl_crm_clear_data_record
+      where groupID = #{groupID}
+      order by createStamp desc
+    </select>
+
+
+    <select id="queryClearRecordByPage" resultType="com.example.service.qa.model.clearrecord.ClearAllDataRecord">
+        select *
+        from tbl_crm_clear_data_record
+        <if test="groupID !=null ">
+            where groupID = #{groupID}
+        </if>
+        order by createStamp desc
+        limit #{pageOffset},#{pageSize}
+    </select>
+
+    <select id="queryRecordCount" resultType="integer">
+        select count(itemID)
+        from tbl_crm_clear_data_record
+        <if test="groupID !=null ">
+            where groupID = #{groupID}
+        </if>
+    </select>
+    <update id="updateRecordResult" parameterType="com.example.service.qa.model.clearrecord.ClearAllDataRecord">
+        update tbl_crm_clear_data_record
+        set result = #{result},
+        <if test="remarks!=null and remarks!=''">
+            remarks = #{remarks},
+        </if>
+        <if test="filePath!=null and filePath!=''">
+            filePath = #{filePath},
+        </if>
+        actionStamp = #{actionStamp}
+        where itemID = #{itemID}
+    </update>
+</mapper>

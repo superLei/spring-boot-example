@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.service.qa.dao.redisinfo.ClearRedisRecordMapper">
+
+
+    <insert id="insertClearRedisRecord" >
+        INSERT INTO `tbl_crm_clear_redis_record`
+        (
+        <trim suffixOverrides=",">
+            <if test="itemID!=null">
+                `itemID`,
+            </if>
+            <if test="redisKey!=null">
+                `redisKey`,
+            </if>
+            <if test="remarks!=null">
+                `remarks`,
+            </if>
+            <if test="redisType!=null">
+                `redisType`,
+            </if>
+            <if test="tag!=null">
+                `tag`,
+            </if>
+            <if test="operator!=null">
+                `operator`,
+            </if>
+            <if test="createStamp!=null">
+                `createStamp`,
+            </if>
+            <if test="actionStamp!=null">
+                `actionStamp`,
+            </if>
+        </trim>
+        )
+        VALUES
+        (
+        <trim suffixOverrides=",">
+            <if test="itemID!=null">
+                #{itemID},
+            </if>
+            <if test="redisKey!=null">
+                #{redisKey},
+            </if>
+            <if test="remarks!=null">
+                #{remarks},
+            </if>
+            <if test="redisType!=null">
+                #{redisType},
+            </if>
+            <if test="tag!=null">
+                #{tag},
+            </if>
+            <if test="operator!=null">
+                #{operator},
+            </if>
+            <if test="createStamp!=null">
+                #{createStamp},
+            </if>
+            <if test="actionStamp!=null">
+                #{actionStamp},
+            </if>
+        </trim>
+        )
+    </insert>
+
+
+
+
+    <update id="updateClearRedisRecord">
+        UPDATE `tbl_crm_clear_redis_record`
+        SET
+        <trim suffixOverrides=",">
+            <if test="redisKey != null and redisKey!=''">
+                `redisKey` = #{redisKey},
+            </if>
+            <if test="remarks != null and remarks!=''">
+                `remarks` = #{remarks},
+            </if>
+            <if test="redisType != null and redisType!=''">
+                `redisType` = #{redisType},
+            </if>
+            <if test="tag != null and tag!=''">
+                `tag` = #{tag},
+            </if>
+            <if test="operator != null and operator!=''">
+                `operator` = #{operator},
+            </if>
+            <if test="createStamp != null">
+                `createStamp` = #{createStamp},
+            </if>
+            <if test="actionStamp != null">
+                `actionStamp` = #{actionStamp},
+            </if>
+        </trim>
+        WHERE
+        <trim suffixOverrides="and">
+            `itemID` = #{itemID} and
+        </trim>
+    </update>
+
+
+
+    <resultMap type="com.example.service.qa.model.redisinfo.ClearRedisRecord" id="ClearRedisRecordMap">
+        <result property="itemID" column="itemID"/>
+        <result property="redisKey" column="redisKey"/>
+        <result property="remarks" column="remarks"/>
+        <result property="redisType" column="redisType"/>
+        <result property="tag" column="tag"/>
+        <result property="operator" column="operator"/>
+        <result property="createStamp" column="createStamp"/>
+        <result property="actionStamp" column="actionStamp"/>
+    </resultMap>
+
+
+    <select id="queryClearRedisRecord" resultMap="ClearRedisRecordMap">
+        select
+        *
+        from  `tbl_crm_clear_redis_record`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="itemID != null">
+                `itemID` = #{itemID} and
+            </if>
+            <if test="redisKey != null and redisKey!=''">
+                `redisKey` = #{redisKey} and
+            </if>
+            <if test="remarks != null and remarks!=''">
+                `remarks` = #{remarks} and
+            </if>
+            <if test="redisType != null and redisType!=''">
+                `redisType` = #{redisType} and
+            </if>
+            <if test="tag != null and tag!=''">
+                `tag` = #{tag} and
+            </if>
+            <if test="operator != null and operator!=''">
+                `operator` = #{operator} and
+            </if>
+            <if test="createStamp != null">
+                `createStamp` = #{createStamp} and
+            </if>
+            <if test="actionStamp != null">
+                `actionStamp` = #{actionStamp} and
+            </if>
+        </trim>
+    </select>
+
+    <select id="queryClearRedisRecordLimit1" resultMap="ClearRedisRecordMap">
+        select
+        *
+        from  `tbl_crm_clear_redis_record`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="itemID != null">
+                `itemID` = #{itemID} and
+            </if>
+            <if test="redisKey != null and redisKey!=''">
+                `redisKey` = #{redisKey} and
+            </if>
+            <if test="remarks != null and remarks!=''">
+                `remarks` = #{remarks} and
+            </if>
+            <if test="redisType != null and redisType!=''">
+                `redisType` = #{redisType} and
+            </if>
+            <if test="tag != null and tag!=''">
+                `tag` = #{tag} and
+            </if>
+            <if test="operator != null and operator!=''">
+                `operator` = #{operator} and
+            </if>
+            <if test="createStamp != null">
+                `createStamp` = #{createStamp} and
+            </if>
+            <if test="actionStamp != null">
+                `actionStamp` = #{actionStamp} and
+            </if>
+        </trim>
+        limit 1
+    </select>
+
+    <sql id="allResult">
+        <trim suffixOverrides=",">
+            `itemID`,
+            `redisKey`,
+            `remarks`,
+            `redisType`,
+            `tag`,
+            `operator`,
+            `createStamp`,
+            `actionStamp`,
+        </trim>
+    </sql>
+
+</mapper>

@@ -1,0 +1,44 @@
+spring:
+  profiles: pre
+  mvc:
+    throw-exception-if-no-handler-found: true
+  resources:
+    add-mappings: true
+  datasource:
+    url: jdbc:mysql:///db_sysbase?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true
+    username: root
+    password: dev
+    driver-class-name: com.mysql.jdbc.Driver
+    initial-size: 3
+    max-active: 20
+    min-idle: 2
+    validation-query: SELECT 1
+
+  datasource2:
+    url: jdbc:mysql:///db_shopcrm_new?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true
+    username: root
+    password: dev
+    driver-class-name: com.mysql.jdbc.Driver
+
+  jackson:
+    generator:
+      write_numbers_as_strings: true
+    date-format: "yyyy-MM-dd HH:mm:ss"
+    time-zone: GMT+8
+
+#mybatis配置
+mybatis:
+  config-location: classpath:mybatis-config.xml
+
+
+ldap:
+  url: ldap://106.2.3.16:389
+  base: dc=,dc=com
+  userDn:
+  password:
+
+server:
+  port: 2080
+
+sqllogger:
+  mode: oss

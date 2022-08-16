@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.service.qa.dao.userinfo.CrmClearUserMapper">
+
+
+    <insert id="insertCrmClearUser"  useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO `tbl_crm_clear_user`
+        (
+        <trim suffixOverrides=",">
+                    <if test="id!=null">
+                        `id`,
+                    </if>
+                    <if test="username!=null">
+                        `username`,
+                    </if>
+                    <if test="password!=null">
+                        `password`,
+                    </if>
+                    <if test="email!=null">
+                        `email`,
+                    </if>
+                    <if test="sex!=null">
+                        `sex`,
+                    </if>
+                    <if test="tel!=null">
+                        `tel`,
+                    </if>
+                    <if test="addr!=null">
+                        `addr`,
+                    </if>
+                    <if test="card!=null">
+                        `card`,
+                    </if>
+        </trim>
+        )
+        VALUES
+        (
+        <trim suffixOverrides=",">
+                <if test="id!=null">
+                    #{id},
+                </if>
+                <if test="username!=null">
+                    #{username},
+                </if>
+                <if test="password!=null">
+                    #{password},
+                </if>
+                <if test="email!=null">
+                    #{email},
+                </if>
+                <if test="sex!=null">
+                    #{sex},
+                </if>
+                <if test="tel!=null">
+                    #{tel},
+                </if>
+                <if test="addr!=null">
+                    #{addr},
+                </if>
+                <if test="card!=null">
+                    #{card},
+                </if>
+        </trim>
+        )
+    </insert>
+
+
+
+
+    <update id="updateCrmClearUser">
+        UPDATE `tbl_crm_clear_user`
+        SET
+        <trim suffixOverrides=",">
+            <if test="email != null and email!=''">
+                `email` = #{email},
+            </if>
+            <if test="sex != null">
+                `sex` = #{sex},
+            </if>
+            <if test="tel != null and tel!=''">
+                `tel` = #{tel},
+            </if>
+            <if test="addr != null and addr!=''">
+                `addr` = #{addr},
+            </if>
+            <if test="card != null and card!=''">
+                `card` = #{card},
+            </if>
+            <if test="realName != null and realName!=''">
+                `realName` = #{realName},
+            </if>
+        </trim>
+        WHERE
+        <trim suffixOverrides="and">
+                `id` = #{id} and
+        </trim>
+    </update>
+
+
+    <resultMap type="com.example.service.qa.model.userinfo.CrmClearUser" id="CrmClearUserMap">
+        <result property="id" column="id"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+        <result property="email" column="email"/>
+        <result property="sex" column="sex"/>
+        <result property="tel" column="tel"/>
+        <result property="addr" column="addr"/>
+        <result property="card" column="card"/>
+    </resultMap>
+
+
+    <select id="queryCrmClearUser" resultMap="CrmClearUserMap">
+        select *
+        from  `tbl_crm_clear_user`
+        <trim prefix="where" suffixOverrides="and | or">
+            <if test="username != null and username!=''">
+                `username` = #{username} and
+            </if>
+        </trim>
+    </select>
+
+
+
+    <sql id="allResult">
+        <trim suffixOverrides=",">
+        `id`,
+        `username`,
+        `password`,
+        `email`,
+        `sex`,
+        `tel`,
+        `addr`,
+        `card`,
+        </trim>
+    </sql>
+
+
+</mapper>
